@@ -1,0 +1,23 @@
+53}11}115:51:55.481 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":23.1,"Humidity":37.1,"DewPoint":7.6},"TempUnit":"C"}
+15:52:23.400 MQT: tasmota/stat/sonoff-lamp/RESULT = {"POWER":"OFF"}
+15:52:23.403 MQT: tasmota/stat/sonoff-lamp/POWER = OFF
+15:56:55.389 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":311,"Heap":26,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":84,"Signal":-58,"LinkCount":1,"Downtime":"0T00:00:05"}}
+15:56:55.476 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.3,"Humidity":39.6,"DewPoint":7.9},"TempUnit":"C"}
+16:01:44.380 APP: Serial logging disabled
+16:01:55.385 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":611,"Heap":26,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":98,"Signal":-51,"LinkCount":1,"Downtime":"0T00:00:05"}}
+16:01:55.395 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.3,"Humidity":39.6,"DewPoint":7.9},"TempUnit":"C"}
+16:06:55.407 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":911,"Heap":26,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":86,"Signal":-57,"LinkCount":1,"Downtime":"0T00:00:05"}}
+16:06:55.418 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.3,"Humidity":39.7,"DewPoint":7.9},"TempUnit":"C"}
+16:09:05.601 UPP: Multicast (re)joined
+16:11:55.383 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":1211,"Heap":23,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":90,"Signal":-55,"LinkCount":1,"Downtime":"0T00:00:05"}}
+16:11:55.392 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.2,"Humidity":40.0,"DewPoint":7.9},"TempUnit":"C"}
+16:16:55.384 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":1511,"Heap":23,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":78,"Signal":-61,"LinkCount":1,"Downtime":"0T00:00:05"}}
+16:16:55.391 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.1,"Humidity":40.1,"DewPoint":7.9},"TempUnit":"C"}
+16:21:55.386 MQT: tasmota/tele/sonoff-lamp/STATE = {"Time":"{{timestamp}}","Uptime":"{{uptime}}","UptimeSec":1811,"Heap":23,"SleepMode":"Dynamic","Sleep":50,"LoadAvg":19,"MqttCount":1,"POWER":"OFF","Wifi":{"AP":1,"SSId":"EasyBox-007024","BSSId":"94:4A:0C:A2:FD:A0","Channel":1,"Mode":"11n","RSSI":96,"Signal":-52,"LinkCount":1,"Downtime":"0T00:00:05"}}
+16:21:55.395 MQT: tasmota/tele/sonoff-lamp/SENSOR = {"Time":"{{timestamp}}","AM2301":{"Temperature":22.1,"Humidity":40.3,"DewPoint":8.0},"TempUnit":"C"}
+16:22:05.526 CMD: power toggle
+16:22:05.532 MQT: tasmota/stat/sonoff-lamp/RESULT = {"POWER":"ON"}
+16:22:05.535 MQT: tasmota/stat/sonoff-lamp/POWER = ON
+16:22:49.752 CMD: power toggle
+16:22:49.758 MQT: tasmota/stat/sonoff-lamp/RESULT = {"POWER":"OFF"}
+16:22:49.761 MQT: tasmota/stat/sonoff-lamp/POWER = OFF}1

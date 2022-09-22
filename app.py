@@ -1,4 +1,5 @@
 import os
+from urllib.parse import unquote
 
 from flask import Flask, render_template, send_from_directory, request, make_response, flash, redirect, url_for
 import datetime
@@ -36,16 +37,36 @@ def configuration():
     return render_template('configuration.html')
 
 
+def console_stats():
+    r = make_response(render_template('stats/console_stats', uptime=uptime(),
+                                      timestamp=datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')))
+    r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
+    return r
+
+
+@app.route('/cs')
+def console():
+    if request.args.get('c1') is not None:  # console command
+        with open('logging/commands/commands.txt', "a", encoding="utf-8") as file_object:
+            file_object.write(
+                f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}: {unquote(request.args.get("c1"))}\r\n')
+    if request.args.get('c2') is not None:  # console stats
+        if request.args.get('c2') == '0':
+            return console_stats()
+        else:
+            return '53}11}1}1'
+    return render_template('console.html')
+
+
 @app.route('/')
 def home():
-    if request.args.get('o') is not None:       # toggle command
+    if request.args.get('o') is not None:  # toggle command
         toggle()
         return home_stats()
-    if request.args.get('m') is not None:       # stats command
+    if request.args.get('m') is not None:  # stats command
         return home_stats()
-    if request.args.get('rst') is not None:     # resa
+    if request.args.get('rst') is not None:  # resa
         return restart()
-
 
     return render_template('home.html')
 
@@ -87,7 +108,7 @@ def u2():
             return render_template('update_no_file_selected.html')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join('uploaded_files/', filename))
+            file.save(os.path.join('logging/uploaded_files/', filename))
             return render_template('upload_success.html')
 
 
