@@ -9,10 +9,16 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
 
+def restart():
+    return render_template('restart.html')
+
+
 @app.route('/')
 def home():
     if request.args.get('m') is not None:
         return home_stats()
+    if request.args.get('rst') is not None:
+        return restart()
 
     return render_template('home.html')
 
