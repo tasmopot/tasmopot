@@ -85,7 +85,7 @@ def uptime():
     hours = int(duration.total_seconds() / 60 / 60)
     minutes = int(duration.total_seconds() / 60) - hours * 60
     seconds = int(duration.total_seconds() % 60)
-    string = f'{duration.days}T{hours}:{minutes}:{seconds}'  # TODO leading zero
+    string = f'{duration.days}T{hours}:{minutes}:{seconds}'  # TODO leading zero and fix days
 
     return string
 
