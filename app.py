@@ -20,15 +20,32 @@ def restart():
     return render_template('restart.html')
 
 
+@app.route('/cn')
+@app.route('/md')
+@app.route('/wi')
+@app.route('/mq')
+@app.route('/dm')
+@app.route('/tm')
+@app.route('/lg')
+@app.route('/co')
+@app.route('/tp')
+@app.route('/rt')
+@app.route('/dl')
+@app.route('/rs')
+def configuration():
+    return render_template('configuration.html')
+
+
 @app.route('/')
 def home():
-    if request.args.get('o') is not None:       # toggle and stats command
+    if request.args.get('o') is not None:       # toggle command
         toggle()
         return home_stats()
     if request.args.get('m') is not None:       # stats command
         return home_stats()
-    if request.args.get('rst') is not None:     # restart command
+    if request.args.get('rst') is not None:     # resa
         return restart()
+
 
     return render_template('home.html')
 
@@ -82,10 +99,11 @@ def too_large(e):
 def uptime():
     start_date = datetime.datetime(2022, 9, 19, 14, 37, 3)
     duration = datetime.datetime.now() - start_date
-    hours = int(duration.total_seconds() / 60 / 60)
-    minutes = int(duration.total_seconds() / 60) - hours * 60
+    days = duration.days
+    hours = int(duration.total_seconds() / 60 / 60) % 24
+    minutes = int(duration.total_seconds() / 60) % 60
     seconds = int(duration.total_seconds() % 60)
-    string = f'{duration.days}T{hours}:{minutes}:{seconds}'  # TODO leading zero and fix days
+    string = f'{days}T{hours}:{minutes}:{seconds}'  # TODO leading zero
 
     return string
 
