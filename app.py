@@ -8,6 +8,13 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
+toggle_state = True
+
+
+def toggle():
+    global toggle_state
+    toggle_state = not toggle_state
+
 
 def restart():
     return render_template('restart.html')
@@ -15,16 +22,19 @@ def restart():
 
 @app.route('/')
 def home():
-    if request.args.get('m') is not None:
+    if request.args.get('o') is not None:       # toggle and stats command
+        toggle()
         return home_stats()
-    if request.args.get('rst') is not None:
+    if request.args.get('m') is not None:       # stats command
+        return home_stats()
+    if request.args.get('rst') is not None:     # restart command
         return restart()
 
     return render_template('home.html')
 
 
 def home_stats():
-    r = make_response(render_template('stats/home_stats'))
+    r = make_response(render_template('stats/home_stats', value='ON' if toggle_state else 'OFF'))
     r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
     return r
 
