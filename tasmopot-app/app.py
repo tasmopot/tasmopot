@@ -47,7 +47,10 @@ def console_stats():
 @app.route('/cs')
 def console():
     if request.args.get('c1') is not None:  # console command
-        with open('logging/commands/commands.txt', "a", encoding="utf-8") as file_object:
+        directory = 'logging/commands/'
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        with open(os.path.join(directory, 'commands.txt'), "a+", encoding="utf-8") as file_object:
             file_object.write(
                 f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}: {unquote(request.args.get("c1"))}{os.linesep}')
     if request.args.get('c2') is not None:  # console stats
@@ -108,7 +111,10 @@ def u2():
             return render_template('update_no_file_selected.html')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join('logging/uploaded_files/', filename))
+            directory = 'logging/uploaded_files/'
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+            file.save(os.path.join(directory, filename))
             return render_template('upload_success.html')
 
 

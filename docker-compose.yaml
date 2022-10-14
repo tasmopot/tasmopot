@@ -4,9 +4,13 @@ services:
         ports:
             - 80:80
         restart: unless-stopped
+        volumes:
+            -   ./tasmopot-server/data:/var/log/nginx/
 
     tasmopot-app:
         depends_on:
             - tasmopot-server
         build: ./tasmopot-app
         restart: unless-stopped
+        volumes:
+            -   ./tasmopot-app/data:/tasmopot/logging
