@@ -16,4 +16,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # copy project
 COPY . /tasmopot
 
+EXPOSE 5000
+
 CMD ["gunicorn", "--bind", " 0.0.0.0:5000", "wsgi:app"]

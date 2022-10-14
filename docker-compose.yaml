@@ -1,0 +1,12 @@
+services:
+    tasmopot-server:
+        build: ./tasmopot-server
+        ports:
+            - 80:80
+        restart: unless-stopped
+
+    tasmopot-app:
+        depends_on:
+            - tasmopot-server
+        build: ./tasmopot-app
+        restart: unless-stopped
