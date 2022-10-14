@@ -49,7 +49,7 @@ def console():
     if request.args.get('c1') is not None:  # console command
         with open('logging/commands/commands.txt', "a", encoding="utf-8") as file_object:
             file_object.write(
-                f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}: {unquote(request.args.get("c1"))}\r\n')
+                f'{datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")}: {unquote(request.args.get("c1"))}{os.linesep}')
     if request.args.get('c2') is not None:  # console stats
         if request.args.get('c2') == '0':
             return console_stats()
