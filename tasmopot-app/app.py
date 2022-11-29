@@ -111,6 +111,7 @@ def u2():
             return render_template('update_no_file_selected.html')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            filename = str(datetime.datetime.now()).split('.')[0].replace(':', '-') + '_' + filename
             directory = 'logging/uploaded_files/'
             if not os.path.exists(directory):
                 os.makedirs(directory)
@@ -123,6 +124,14 @@ def too_large(e):
     return render_template('update_too_large.html')
 
 
+@app.route('/cm')
+def cm():
+    if request.args.get('cmnd') is not None:
+        if 'status' in request.args.get('cmnd').lower():
+            return send_from_directory('templates/stats', 'status.json')
+    return home()
+
+
 def uptime():
     start_date = datetime.datetime(2022, 9, 19, 14, 37, 3)
     duration = datetime.datetime.now() - start_date
@@ -133,6 +142,12 @@ def uptime():
     string = f'{days}T{hours}:{minutes}:{seconds}'  # TODO leading zero
 
     return string
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return home()
 
 
 if __name__ == '__main__':
