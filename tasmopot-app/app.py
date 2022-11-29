@@ -111,6 +111,7 @@ def u2():
             return render_template('update_no_file_selected.html')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            filename = str(datetime.datetime.now()).split('.')[0].replace(':', '-') + '_' + filename
             directory = 'logging/uploaded_files/'
             if not os.path.exists(directory):
                 os.makedirs(directory)
