@@ -144,5 +144,11 @@ def uptime():
     return string
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return home()
+
+
 if __name__ == '__main__':
     app.run()
