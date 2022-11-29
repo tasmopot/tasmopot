@@ -124,6 +124,14 @@ def too_large(e):
     return render_template('update_too_large.html')
 
 
+@app.route('/cm')
+def cm():
+    if request.args.get('cmnd') is not None:
+        if 'status' in request.args.get('cmnd').lower():
+            return send_from_directory('templates/stats', 'status.json')
+    return home()
+
+
 def uptime():
     start_date = datetime.datetime(2022, 9, 19, 14, 37, 3)
     duration = datetime.datetime.now() - start_date
