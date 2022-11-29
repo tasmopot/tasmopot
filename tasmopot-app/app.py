@@ -128,7 +128,11 @@ def too_large(e):
 def cm():
     if request.args.get('cmnd') is not None:
         if 'status' in request.args.get('cmnd').lower():
-            return send_from_directory('templates/stats', 'status.json')
+            with open('templates/stats/status.json', 'r') as file:
+                r = make_response(file.read())
+                r.mimetype = 'application/json'
+                return r
+            # return send_from_directory('templates/stats', 'status.json')
     return home()
 
 
