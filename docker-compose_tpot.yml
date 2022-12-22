@@ -1,0 +1,21 @@
+  tasmopot-server:
+    build: /home/tsec/tasmopot/tasmopot-server
+    container_name: tasmopot-server
+    depends_on:
+      - tasmopot-app
+    networks:
+      - tasmopot_local
+    ports:
+      - "8000:80"
+    restart: always
+    volumes:
+      - /data/tasmopot/tasmopot-server/data:/var/log/nginx/
+
+  tasmopot-app:
+    container_name: tasmopot-app
+    networks:
+      - tasmopot_local
+    build: /home/tsec/tasmopot/tasmopot-app
+    restart: always
+    volumes:
+      - /data/tasmopot/tasmopot-app/data:/tasmopot/logging
