@@ -132,6 +132,12 @@ def cm():
                 r = make_response(file.read())
                 r.mimetype = 'application/json'
                 return r
+        elif 'module' in request.args.get('cmnd').lower():
+            with open('templates/stats/module.json', 'r') as file:
+                r = make_response(file.read())
+                r.mimetype = 'application/json'
+                return r
+
             # return send_from_directory('templates/stats', 'status.json')
     return home()
 
