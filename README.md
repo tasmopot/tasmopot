@@ -63,6 +63,11 @@ Start Python App
 **tasmopot-server:** nginx, nginx Headers More Plugin
 
 
+## Architecture
+
+![Tasmopot Architecture](tasmopot_architecture.png)
+
+
 ## FAQ
 
 #### Where are the logs located?
