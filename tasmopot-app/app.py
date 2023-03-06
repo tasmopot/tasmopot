@@ -1,7 +1,7 @@
 import os
 from urllib.parse import unquote
 
-from flask import Flask, render_template, send_from_directory, request, make_response, flash, redirect, url_for
+from flask import Flask, render_template, request, make_response
 import datetime
 
 from werkzeug.utils import secure_filename
@@ -13,11 +13,19 @@ toggle_state = True
 
 
 def toggle():
+    """
+    Toggles the power button
+    :return:
+    """
     global toggle_state
     toggle_state = not toggle_state
 
 
 def restart():
+    """
+    Restart page
+    :return:
+    """
     return render_template('restart.html')
 
 
@@ -34,18 +42,29 @@ def restart():
 @app.route('/dl')
 @app.route('/rs')
 def configuration():
+    """
+    Configuration route, returns main configuration page for all sub config pages
+    :return:
+    """
     return render_template('configuration.html')
 
 
 def console_stats():
+    """
+    Console stats route
+    :return:
+    """
     r = make_response(render_template('stats/console_stats', uptime=uptime(),
                                       timestamp=datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')))
-    r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
     return r
 
 
 @app.route('/cs')
 def console():
+    """
+    Console route, logs executed commands with timestamp
+    :return:
+    """
     if request.args.get('c1') is not None:  # console command
         directory = 'logging/commands/'
         if not os.path.exists(directory):
@@ -63,34 +82,47 @@ def console():
 
 @app.route('/')
 def home():
+    """
+    Home route, implementing dynamic toggle button
+    :return:
+    """
     if request.args.get('o') is not None:  # toggle command
         toggle()
         return home_stats()
     if request.args.get('m') is not None:  # stats command
         return home_stats()
-    if request.args.get('rst') is not None:  # resa
+    if request.args.get('rst') is not None:  # restart command
         return restart()
 
     return render_template('home.html')
 
 
 def home_stats():
+    """
+    Home stats route
+    :return:
+    """
     r = make_response(render_template('stats/home_stats', value='ON' if toggle_state else 'OFF'))
-    r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
     return r
 
 
 @app.route('/in')
 def info():
+    """
+    Info route
+    :return:
+    """
     r = make_response(render_template('info.html', uptime=uptime(), percentage='88', dbm='-56'))
-    r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
     return r
 
 
 @app.route('/up')
 def up():
+    """
+    Update route
+    :return:
+    """
     r = make_response(render_template('update.html'))
-    r.headers['Server'] = 'Tasmota/12.1.1 (ESP8266EX)'
     return r
 
 
@@ -100,6 +132,10 @@ def allowed_file(filename):
 
 @app.route('/u2', methods=['POST'])
 def u2():
+    """
+    u2 POST route for update file upload, logs and saves uploaded files
+    :return:
+    """
     if request.method == 'POST':
         # check if the post request has the file part
         if 'u2' not in request.files:
@@ -110,6 +146,7 @@ def u2():
         if file.filename == '':
             return render_template('update_no_file_selected.html')
         if file and allowed_file(file.filename):
+            # securing filename and adding timestamp
             filename = secure_filename(file.filename)
             filename = str(datetime.datetime.now()).split('.')[0].replace(':', '-') + '_' + filename
             directory = 'logging/uploaded_files/'
@@ -121,11 +158,20 @@ def u2():
 
 @app.errorhandler(413)
 def too_large(e):
+    """
+    Update file too large page
+    :param e:
+    :return:
+    """
     return render_template('update_too_large.html')
 
 
 @app.route('/cm')
 def cm():
+    """
+    cm route: cmnd path, implements status and module command, else returns home
+    :return:
+    """
     if request.args.get('cmnd') is not None:
         if 'status' in request.args.get('cmnd').lower():
             with open('templates/stats/status.json', 'r') as file:
@@ -137,12 +183,15 @@ def cm():
                 r = make_response(file.read())
                 r.mimetype = 'application/json'
                 return r
-
-            # return send_from_directory('templates/stats', 'status.json')
+        # TODO: log all unrecognized commands
     return home()
 
 
 def uptime():
+    """
+    Returns the uptime timestamp dynamically
+    :return:
+    """
     start_date = datetime.datetime(2022, 9, 19, 14, 37, 3)
     duration = datetime.datetime.now() - start_date
     days = duration.days
@@ -157,6 +206,11 @@ def uptime():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
+    """
+    Home route
+    :param path:
+    :return:
+    """
     return home()
 
 
